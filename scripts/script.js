@@ -5,7 +5,7 @@ const imgView = document.getElementById("img-view");
 inputFile.addEventListener("change", uploadImage);
 
 $("#skincolor").change(function(){
-  var chosenColor = $(this).val();
+  var hexCode = $(this).val();
  
   // Remove the old paragraph if it exists
   $('#colorchoice p').remove();
@@ -13,9 +13,18 @@ $("#skincolor").change(function(){
   // Create a new paragraph element
   var p = document.createElement('p');
   // Set the text content of the paragraph to display the chosen skin color
-  p.textContent = 'Your skin tone is ' + chosenColor;
+  
+  fetch(`http://127.0.0.1:5001/ask?hex_code=${encodeURIComponent(hexCode)}`, {
+                method: 'GET',
+            })
+            .then(response => response.json())
+            .then(data => {
+              p.textContent = data.text;
+            })
+            .catch(error => console.error('Error:', error));
  
   // Append the paragraph to the div with ID 'colorchoice'
+
   $('#colorchoice').append(p);
  });
 
