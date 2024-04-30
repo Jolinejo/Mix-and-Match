@@ -1,7 +1,7 @@
 """ Starts a Flash Web Application """
 import os
 from flask import Flask, request, render_template, jsonify
-from daltonize import daltonize
+import bcrypt
 import numpy as np
 from PIL import Image
 import cv2
@@ -98,6 +98,7 @@ def register():
     username = data.get('username')
     email = data.get('email')
     password = data.get('password')
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
     if not username or not email or not password:
         return jsonify({'error': 'Missing required fields'}), 400
@@ -108,7 +109,7 @@ def register():
     if User.find_by_email(email):
         return jsonify({'error': 'Email already exists'}), 400
 
-    user = User(username, email, password)
+    user = User(username, email, hashed_password)
     user.save_to_db()
 
     return jsonify({'message': 'User registered successfully'}), 201
