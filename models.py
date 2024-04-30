@@ -1,8 +1,9 @@
 from flask_pymongo import PyMongo
 #from bson.objectid import ObjectId
-from app import app
+import app
+import uuid
 
-mongo = PyMongo(app)
+from app import mongo
 
 class User:
     def __init__(self, username, email, password):
@@ -12,6 +13,7 @@ class User:
 
     def save_to_db(self):
         user_data = {
+            "_id": uuid.uuid4().hex,
             "username": self.username,
             "email": self.email,
             "password": self.password
