@@ -7,12 +7,6 @@ from extensions import mongo
 
 
 class User:
-    def start_session(self, user):
-        del user['password']
-        session['logged_in'] = True
-        session['user'] = user
-        print(session)
-        return jsonify(user), 200
 
     def sign_up(self):
         data = request.json
@@ -36,7 +30,8 @@ class User:
             "password": hashed_password
         }
         if mongo.db.users.insert_one(user_data):
-            return self.start_session(user_data)
+            from app import start_session
+            return start_session(user_data)
         return jsonify({ "error": "Signup failed" }), 400
     
     def signout(self):
@@ -90,7 +85,7 @@ class User:
         user = self.find_by_email(email)
 
         if user and bcrypt.checkpw(password.encode('utf-8'), user['password']):
-            return self.start_session(user)
+            return True
         
         return jsonify({ "error": "Invalid login credentials" }), 401
 

@@ -90,6 +90,9 @@ from user.routes import user_routes
 app.register_blueprint(user_routes)
 
 
+@app.route('/homepage', methods=['GET'])
+def homepage():
+    return render_template('homepage.html')
 
 @app.route('/ask', methods=['GET'])
 def retrieve_response():
@@ -97,6 +100,10 @@ def retrieve_response():
     hex_code = request.args.get('hex_code')
     response = get_gemini_resp(hex_code)
     return jsonify({'text': response})
+
+@app.route('/index/', methods=['GET'])
+def index():
+    return render_template('index.html')
     
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if __name__ == "__main__":
