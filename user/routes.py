@@ -20,6 +20,6 @@ def update_user():
 def get_user_data():
     return user.get_user_data()
 
-@user_routes.route('/user/signout')
+@user_routes.route('/user/signout', methods=['GET'])
 def signout():
-    return user.sign_up()
+    return user.signout()

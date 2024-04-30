@@ -39,4 +39,25 @@ function uploadImage() {
 }
 
 
+document.addEventListener('DOMContentLoaded', function() {
+  // Event listener for sign-out button
+  document.getElementById('signOutBtn').addEventListener('click', function() {
+      // Assuming you have a sign-out endpoint '/signout'
+      fetch('http://127.0.0.1:5001/user/signout', {
+          method: 'GET',
+      })
+      .then(response => {
+          if (response.ok) {
+              // Sign out successful, redirect to login page or perform any other action
+              window.location.href = 'homepage.html'; // Redirect to login page
+          } else {
+              // Handle sign out failure
+              console.error('Sign out failed:', response.statusText);
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+  });
+});
 
