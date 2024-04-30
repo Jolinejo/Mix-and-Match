@@ -8,7 +8,7 @@ user = User()
 def register():
     return user.sign_up()
 
-@user_routes.route('/user/login')
+@user_routes.route('/user/login', methods=['POST'])
 def login():
     return user.login()
 

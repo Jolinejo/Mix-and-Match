@@ -98,7 +98,7 @@ def retrieve_response():
     response = get_gemini_resp(hex_code)
     return jsonify({'text': response})
     
-cors = CORS(app, resources={r"/ask": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if __name__ == "__main__":
     """ Main Function """
     app.run(host='0.0.0.0', port=5001)

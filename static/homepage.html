@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/homepage.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>Sign Up & Log In</title>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-section">
+
+            <h1>Sign Up</h1>
+            <form id="signUpForm">
+                <label for="signUpUsername">Username:</label>
+                <input type="text" name="username" class="field" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" class="field" required>
+                <label for="signUpPassword">Password:</label>
+                <input type="password" name="password" class="field" required>
+
+                <p class="error error--hidden"></p>
+
+                <button type="submit">Sign Up</button>
+            </form>
+
+        </div>
+
+        <div class="form-section">
+
+            <h1>Log In</h1>
+            <form id="logInForm">
+                <label for="signUpUsername">Username:</label>
+                <input type="text" name="username" class="field" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" class="field" required>
+                <label for="signUpPassword">Password:</label>
+                <input type="password" name="password" class="field" required>
+
+                <p class="error2 error--hidden"></p>
+
+                <button type="submit">Log In</button>
+            </form>
+
+        </div>
+
+    
+    </div>
+    
+    <script src="../scripts/signInlogIn.js"></script>
+</body>
+</html>
