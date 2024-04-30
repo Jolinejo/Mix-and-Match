@@ -88,31 +88,14 @@ def get_gemini_resp(color):
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads' 
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/mixmatch'
+app.secret_key = b'\x07\x19\x98\x01\xd5\x1dy\xc5\x8a\x14p\xa4\xe6*`\xbc'
 
 mongo = PyMongo(app)
 
 @app.route('/register', methods=['POST'])
 def register():
     from models import User
-    data = request.json
-    username = data.get('username')
-    email = data.get('email')
-    password = data.get('password')
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-
-    if not username or not email or not password:
-        return jsonify({'error': 'Missing required fields'}), 400
-
-    if User.find_by_username(username):
-        return jsonify({'error': 'Username already exists'}), 400
-
-    if User.find_by_email(email):
-        return jsonify({'error': 'Email already exists'}), 400
-
-    user = User(username, email, hashed_password)
-    user.save_to_db()
-
-    return jsonify({'message': 'User registered successfully'}), 201
+    return User().sign_up()
 
 
 @app.route('/ask', methods=['GET'])
