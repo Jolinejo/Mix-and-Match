@@ -85,17 +85,10 @@ def get_gemini_resp(color):
 
 
 
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads' 
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/mixmatch'
-app.secret_key = b'\x07\x19\x98\x01\xd5\x1dy\xc5\x8a\x14p\xa4\xe6*`\xbc'
+from extensions import app, mongo
+from user.routes import user_routes
+app.register_blueprint(user_routes)
 
-mongo = PyMongo(app)
-
-@app.route('/register', methods=['POST'])
-def register():
-    from models import User
-    return User().sign_up()
 
 
 @app.route('/ask', methods=['GET'])
@@ -105,7 +98,7 @@ def retrieve_response():
     response = get_gemini_resp(hex_code)
     return jsonify({'text': response})
     
-cors = CORS(app, resources={r"/ask": {"origins": "*"}})
+##cors = CORS(app, resources={r"/ask": {"origins": "*"}})
 if __name__ == "__main__":
     """ Main Function """
     app.run(host='0.0.0.0', port=5001)

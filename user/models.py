@@ -1,14 +1,12 @@
 from flask_pymongo import PyMongo
 from flask import Flask, jsonify, request, session, redirect
 #from bson.objectid import ObjectId
-import app
 import uuid
 import bcrypt
+from extensions import mongo
 
-from app import mongo
 
 class User:
-
     def start_session(self, user):
         del user['password']
         session['logged_in'] = True
