@@ -48,6 +48,10 @@ class User:
     @staticmethod
     def find_by_email(email):
         return mongo.db.users.find_one({"email": email})
+    
+    #def signout(self):
+        #session.clear()
+        #return redirect('/')
 
     #@staticmethod
     #def find_by_id(user_id):
