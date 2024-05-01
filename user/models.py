@@ -44,7 +44,7 @@ class User:
         return jsonify({"message": "signed out"}), 200
     
     def update_user(self):
-        print(session)
+        
         data = request.json
         if 'logged_in' in session:
             print(234)
@@ -59,7 +59,7 @@ class User:
             user[key] = value
         
         result = mongo.db.users.update_one({"_id": user_id}, {"$set": user})
-
+        
         if result.modified_count == 1:
             return jsonify({"message": "User updated successfully"}), 200
         else:

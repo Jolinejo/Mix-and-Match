@@ -105,7 +105,24 @@ fetch(`http://127.0.0.1:5001/ask?hex_code=${encodeURIComponent(hexCode)}`, {
      bestHairColorsDiv.appendChild(hairColorPairDiv);
      result.bestHairColors[bestHairColors[i]] = code;
   }
- console.log(result);
+
+  fetch('/user/update', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(result)
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log('User updated successfully');
+    } else {
+      console.error('Failed to update user');
+    }
+  })
+  .catch(error => {
+    console.error('Error updating user:', error);
+  });
 
 })
 .catch(error => console.error('Error:', error));

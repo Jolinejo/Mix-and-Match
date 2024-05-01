@@ -8,21 +8,14 @@
 <body>
     <h1>User Information</h1>
     <div>
-        <strong>ID:</strong> <span id="userId"></span><br>
+        <h2>Your Pallete</h2>
         <strong>Name:</strong> <span id="userName"></span><br>
-        <strong>Email:</strong> <span id="userEmail"></span><br>
+        <strong>Season:</strong> <span id="userSeason"></span><br>
+        <strong>Matching Colors:</strong> <span id="userColors"></span><br>
+        <strong>Best Hair Colors:</strong> <span id="userHairColors"></span><br>
     </div>
 
-    <script>
-        // Retrieve user information from Flask session
-        const userId = "{{ session['user']['_id'] }}";
-        const userName = "{{ session['user']['username'] }}";
-        const userEmail = "{{ session['user']['email'] }}";
-
-        // Update HTML elements with user information
-        document.getElementById("userId").textContent = userId;
-        document.getElementById("userName").textContent = userName;
-        document.getElementById("userEmail").textContent = userEmail;
-    </script>
+    <!-- Link the JavaScript file -->
+    <script src="/static/scripts/dashboard.js"></script>
 </body>
 </html>
