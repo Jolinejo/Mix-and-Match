@@ -165,3 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 });
+
+document.getElementById('dashboardBtn').addEventListener('click', function() {
+  window.location.href = '/dashboard';
+});
