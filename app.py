@@ -1,5 +1,5 @@
 """ Starts a Flash Web Application """
-from flask import request, render_template, jsonify
+from flask import request, render_template, jsonify, session
 from flask_cors import CORS
 import config
 import google.generativeai as genai
@@ -121,12 +121,16 @@ def retrieve_response():
 @app.route('/index/', methods=['GET'])
 def index():
     """image uploading route"""
-    return render_template('index.html')
+    if 'logged_in' in session:
+        return render_template('index.html')
+    return render_template('homepage.html')
 
 @app.route('/dashboard/', methods=['GET'])
 def dashboard():
     """dashboard route"""
-    return render_template('dashboard.html')
+    if 'logged_in' in session:
+        return render_template('dashboard.html')
+    return render_template('homepage.html')
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if __name__ == "__main__":

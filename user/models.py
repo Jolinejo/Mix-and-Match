@@ -1,13 +1,14 @@
-from flask_pymongo import PyMongo
-from flask import Flask, jsonify, request, session, redirect
-#from bson.objectid import ObjectId
+from flask import jsonify, request, session
 import uuid
 import bcrypt
 from extensions import mongo
 
 
 class User:
+    """User class with user funcitons for the routes"""
+
     def start_session(self, user):
+        """starts a session and removes the password"""
         del user['password']
         session['logged_in'] = True
         session['user'] = user
@@ -15,6 +16,7 @@ class User:
         return jsonify(user), 200
 
     def sign_up(self):
+        """signs up a user and starts the session"""
         data = request.json
         username = data.get('username')
         email = data.get('email')
@@ -40,14 +42,13 @@ class User:
         return jsonify({ "error": "Signup failed" }), 400
     
     def signout(self):
+        """clears the session to sign out the user"""
         session.clear()
         return jsonify({"message": "signed out"}), 200
     
     def update_user(self):
-        print(session)
+        """updates the user based on sent keys and values"""
         data = request.json
-        if 'logged_in' in session:
-            print(234)
         user_id = session['user']['_id']
 
         user = mongo.db.users.find_one({"_id": user_id})
@@ -66,6 +67,7 @@ class User:
             return jsonify({"error": "Failed to update user"}), 500
     
     def get_user_data(self):
+        """retrieves user data based on query keys"""
         keys = request.args.getlist('keys')
         if 'user' not in session:
             return jsonify({"error": "User not logged in"}), 401
@@ -82,6 +84,7 @@ class User:
         return jsonify(user_data), 200
     
     def login(self):
+        """logs in user and starts the session"""
         data = request.json
         username = data.get('username')
         email = data.get('email')
@@ -94,9 +97,7 @@ class User:
         
         return jsonify({ "error": "Invalid login credentials" }), 401
 
-    #@staticmethod
-    #def find_by_id(user_id):
-        #return mongo.db.users.find_one({"_id": ObjectId(user_id)})
+
     @staticmethod
     def find_by_username(username):
         return mongo.db.users.find_one({"username": username})

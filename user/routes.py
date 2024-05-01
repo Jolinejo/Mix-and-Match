@@ -1,6 +1,5 @@
-from flask import Flask, Blueprint
+from flask import Blueprint
 from user.models import User
-from extensions import app
 user_routes = Blueprint('user_routes', __name__)
 
 user = User()
