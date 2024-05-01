@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+</head>
+<body>
+    <h1>User Information</h1>
+    <div>
+        <strong>ID:</strong> <span id="userId"></span><br>
+        <strong>Name:</strong> <span id="userName"></span><br>
+        <strong>Email:</strong> <span id="userEmail"></span><br>
+    </div>
+
+    <script>
+        // Retrieve user information from Flask session
+        const userId = "{{ session['user']['_id'] }}";
+        const userName = "{{ session['user']['username'] }}";
+        const userEmail = "{{ session['user']['email'] }}";
+
+        // Update HTML elements with user information
+        document.getElementById("userId").textContent = userId;
+        document.getElementById("userName").textContent = userName;
+        document.getElementById("userEmail").textContent = userEmail;
+    </script>
+</body>
+</html>

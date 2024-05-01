@@ -138,6 +138,10 @@ def retrieve_response():
 @app.route('/index/', methods=['GET'])
 def index():
     return render_template('index.html')
+
+@app.route('/dashboard/', methods=['GET'])
+def dashboard():
+    return render_template('dashboard.html')
     
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if __name__ == "__main__":

@@ -26,6 +26,13 @@ fetch(`http://127.0.0.1:5001/ask?hex_code=${encodeURIComponent(hexCode)}`, {
  const seasonName = document.createElement('h2');
  seasonName.textContent = data.season;
  colorChoiceDiv.appendChild(seasonName);
+
+ const result = {
+  season: data.season,
+  matchingColors: {},
+  bestHairColors: {}
+};
+
  // Create a div to hold the matching colors
  const matchingColorsHeader = document.createElement('h3');
  matchingColorsHeader.textContent = 'Matching Colors';
@@ -49,11 +56,16 @@ fetch(`http://127.0.0.1:5001/ask?hex_code=${encodeURIComponent(hexCode)}`, {
     // Create a paragraph for the color hex code as background color
     const colorHex = document.createElement('p');
     colorHex.textContent = data['matching colors'][i + 1][0];
-    colorHex.style.backgroundColor = `${data['matching colors'][i + 1][0]}`;
+    let code = data['matching colors'][i + 1][0];
+    if (!code.startsWith("#")) {
+      code = "#" + code;
+    }
+    colorHex.style.backgroundColor = `${code}`;
     colorPairDiv.appendChild(colorHex);
 
     // Append the color pair div to the matching colors container
     matchingColorsDiv.appendChild(colorPairDiv);
+    result.matchingColors[data['matching colors'][i][0]] = code;
  }
 
  const bestHairColorsHeader = document.createElement('h3');
@@ -82,13 +94,18 @@ fetch(`http://127.0.0.1:5001/ask?hex_code=${encodeURIComponent(hexCode)}`, {
      // Create a paragraph for the hair color hex code as background color
      const hairColorHex = document.createElement('p');
      hairColorHex.textContent = bestHairColors[i + 1];
-     hairColorHex.style.backgroundColor = `${bestHairColors[i + 1]}`;
+     let code = bestHairColors[i + 1];
+     if (!code.startsWith("#")) {
+      code = "#" + code;
+    }
+     hairColorHex.style.backgroundColor = `${code}`;
      hairColorPairDiv.appendChild(hairColorHex);
  
      // Append the hair color pair div to the best hair colors container
      bestHairColorsDiv.appendChild(hairColorPairDiv);
+     result.bestHairColors[bestHairColors[i]] = code;
   }
- 
+ console.log(result);
 
 })
 .catch(error => console.error('Error:', error));
