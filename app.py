@@ -100,6 +100,7 @@ app.register_blueprint(user_routes)
 
 @app.route('/homepage/', methods=['GET'])
 @app.route('/homepage', methods=['GET'])
+@app.route('/')
 def homepage():
     return render_template('homepage.html')
 
@@ -142,7 +143,7 @@ def index():
 @app.route('/dashboard/', methods=['GET'])
 def dashboard():
     return render_template('dashboard.html')
-    
+
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if __name__ == "__main__":
     """ Main Function """
