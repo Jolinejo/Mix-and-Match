@@ -54,3 +54,24 @@
 #signOutBtn:hover {
     background-color: #a39eff;
 }
+.matching-colors-container, .best-hair-colors-container {
+    display: flex; /* Use Flexbox to layout the color pairs */
+    flex-wrap: wrap; /* Allow the items to wrap as needed */
+    gap: 10px; /* Add some space between the color pairs */
+   }
+   
+   .color-pair {
+    display: flex; /* Use Flexbox to layout the color name and hex code */
+    align-items: center; /* Align items vertically in the center */
+    gap: 5px; /* Add some space between the color name and hex code */
+   }
+   form {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+  }
+  
+  #colorchoice, #output {
+    width: 100%; /* Occupy full width */
+    margin-bottom: 20px; /* Add space between the divs */
+  }
+  

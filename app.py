@@ -70,9 +70,14 @@ def get_gemini_resp(color):
     what are the best colors for someone with skin tone #{color}, 
     am I a summer, spring, winter or fall person
     reply according to this format:
-    season: name
-    matching colos: name, hex code
-    best hair color: name, hex code
+    season:
+    name
+    matching colors: 
+    name, hex code, name, hex code
+    best hair color: 
+    name, hex code, name, hex code
+    don't add any stars 
+    put the all matching colors and all the hair colors in one line
 
 
     """
@@ -81,7 +86,10 @@ def get_gemini_resp(color):
    response = model.generate_content(message_text)
    return(response.candidates[0].content.parts[0].text)
    
-
+def remove_empty_lines(text):
+    lines = text.split('\n')
+    non_empty_lines = [line for line in lines if line.strip()]
+    return '\n'.join(non_empty_lines)
 
 
 
@@ -97,10 +105,35 @@ def homepage():
 
 @app.route('/ask', methods=['GET'])
 def retrieve_response():
+    import re
     """ sends image to func and returns edited image"""
     hex_code = request.args.get('hex_code')
     response = get_gemini_resp(hex_code)
-    return jsonify({'text': response})
+    print(response)
+    response_text = remove_empty_lines(response)
+    print(response_text)
+
+    matches = re.findall(r'season:\s*(.*)\nname:\s*(.*)\nmatching colors:\s*(.*)\nbest hair color:\s*(.*)', response_text, re.IGNORECASE)
+
+    # Process each match
+    data = []
+    for match in matches:
+        season, name, colors_text, hair_color = match
+        # Split colors by comma and strip whitespace
+        colors = [color.strip() for color in colors_text.split(',')]
+        # Split each color into name and hex code
+        colors = [re.split(r'\s+#', color) for color in colors]
+        # Create a dictionary for each match
+        item = {
+            'season': season,
+            'name': name,
+            'matching colors': colors,
+            'best hair color': hair_color.strip()
+        }
+        data.append(item)
+    
+    print(data)
+    return jsonify(data[0])
 
 @app.route('/index/', methods=['GET'])
 def index():
