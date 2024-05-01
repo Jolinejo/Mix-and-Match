@@ -1,0 +1,60 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f8ff; /* Light background color */
+    color: #6831FF; /* Primary text color */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #6831FF; /* Soft pastel color for main heading */
+}
+
+h2 {
+    color: #a39eff; /* Slightly darker shade for subheading */
+}
+
+/* User Information Section */
+div {
+    background-color: #fff; /* White background for user info section */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Color Palettes */
+#userColors, #userHairColors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Individual Color Divs */
+#userColors div, #userHairColors div {
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff; /* White text for color divs */
+    font-weight: bold;
+}
+
+/* Matching Colors */
+#userColors div {
+    background-color: #e7baff; /* Soft pastel color for matching colors */
+}
+
+/* Best Hair Colors */
+#userHairColors div {
+    background-color: #a39eff; /* Slightly darker shade for best hair colors */
+}
+
+/* Text Styling */
+strong {
+    color: #777; /* Gray color for strong tags */
+}
+
+
+a:hover {
+    color: #a39eff; /* Slightly darker shade for hover state */
+}
