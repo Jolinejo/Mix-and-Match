@@ -90,6 +90,7 @@ from user.routes import user_routes
 app.register_blueprint(user_routes)
 
 
+@app.route('/homepage/', methods=['GET'])
 @app.route('/homepage', methods=['GET'])
 def homepage():
     return render_template('homepage.html')

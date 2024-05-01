@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => {
             if (response.ok) {
-                window.location.href = 'index.html';
+                window.location.href = '/index/';
             } else {
                 return response.json();
             }
