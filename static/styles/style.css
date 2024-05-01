@@ -54,24 +54,60 @@
 #signOutBtn:hover {
     background-color: #a39eff;
 }
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f8ff; /* Light background color */
+    color: #6831FF; /* Primary text color */
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #6831FF; /* Soft pastel color for headings */
+}
+
+/* Output Container */
+#output {
+    background-color: #fff; /* White background for output section */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Color Pair Container */
 .matching-colors-container, .best-hair-colors-container {
-    display: flex; /* Use Flexbox to layout the color pairs */
-    flex-wrap: wrap; /* Allow the items to wrap as needed */
-    gap: 10px; /* Add some space between the color pairs */
-   }
-   
-   .color-pair {
-    display: flex; /* Use Flexbox to layout the color name and hex code */
-    align-items: center; /* Align items vertically in the center */
-    gap: 5px; /* Add some space between the color name and hex code */
-   }
-   form {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-  }
-  
-  #colorchoice, #output {
-    width: 100%; /* Occupy full width */
-    margin-bottom: 20px; /* Add space between the divs */
-  }
-  
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Individual Color Pair */
+.color-pair {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff; /* White text for color divs */
+    font-weight: bold;
+}
+
+/* Matching Colors */
+.matching-colors-container .color-pair {
+    background-color: #e7baff; /* Soft pastel color for matching colors */
+}
+
+/* Best Hair Colors */
+.best-hair-colors-container .color-pair {
+    background-color: #a39eff; /* Slightly darker shade for best hair colors */
+}
+
+/* Color Hex Code Background */
+.color-pair p:last-child {
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
