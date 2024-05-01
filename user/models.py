@@ -36,8 +36,7 @@ class User:
             "password": hashed_password
         }
         if mongo.db.users.insert_one(user_data):
-            from app import start_session
-            return start_session(user_data)
+            return self.start_session(user_data)
         return jsonify({ "error": "Signup failed" }), 400
     
     def signout(self):
