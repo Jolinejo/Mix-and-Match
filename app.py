@@ -1,37 +1,12 @@
 """ Starts a Flash Web Application """
-import os
-from flask import Flask, request, render_template, jsonify
-import bcrypt
-import numpy as np
-from PIL import Image
-import cv2
+from flask import request, render_template, jsonify
 from flask_cors import CORS
-import base64
-
-from flask_pymongo import PyMongo
-
-
 import config
-
-import pathlib
-import textwrap
-
 import google.generativeai as genai
+import re
+from extensions import app
+from user.routes import user_routes
 
-# Used to securely store your API key
-#from google.colab import userdata
-
-from IPython.display import display
-from IPython.display import Markdown
-
-def to_markdown_orig(text):
-        text = text.replace('•', '  *')
-        return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
-
-def to_markdown(text):
-        text=text._result.candidates[0].content.parts[0].text
-        text = text.replace('•', '  *')
-        return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
 def get_gemini_resp(color):
    """sends color to gemini and returns the response"""
@@ -87,14 +62,14 @@ def get_gemini_resp(color):
    return(response.candidates[0].content.parts[0].text)
    
 def remove_empty_lines(text):
+    """removes empty lines in a text"""
     lines = text.split('\n')
     non_empty_lines = [line for line in lines if line.strip()]
     return '\n'.join(non_empty_lines)
 
 
 
-from extensions import app, mongo
-from user.routes import user_routes
+
 app.register_blueprint(user_routes)
 
 
@@ -102,12 +77,19 @@ app.register_blueprint(user_routes)
 @app.route('/homepage', methods=['GET'])
 @app.route('/')
 def homepage():
+    """homepage route"""
     return render_template('homepage.html')
 
 @app.route('/ask', methods=['GET'])
 def retrieve_response():
-    import re
-    """ sends image to func and returns edited image"""
+    """ sends prompt with skin color and returns response in this format:
+        season:
+        name
+        matching colors: 
+        name, hex code, name, hex code
+        best hair color: 
+        name, hex code, name, hex code
+    """
     hex_code = request.args.get('hex_code')
     response = get_gemini_resp(hex_code)
     print(response)
@@ -138,10 +120,12 @@ def retrieve_response():
 
 @app.route('/index/', methods=['GET'])
 def index():
+    """image uploading route"""
     return render_template('index.html')
 
 @app.route('/dashboard/', methods=['GET'])
 def dashboard():
+    """dashboard route"""
     return render_template('dashboard.html')
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
