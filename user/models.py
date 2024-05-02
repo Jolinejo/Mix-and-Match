@@ -86,7 +86,6 @@ class User:
     def login(self):
         """logs in user and starts the session"""
         data = request.json
-        username = data.get('username')
         email = data.get('email')
         password = data.get('password')
 
