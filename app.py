@@ -80,7 +80,7 @@ def logout_required(f):
     if 'logged_in' not in session:
       return f(*args, **kwargs)
     else:
-      return redirect(url_for('upload'))
+      return redirect(url_for('index'))
   
   return wrap
 
