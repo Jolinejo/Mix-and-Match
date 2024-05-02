@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }).then(data => {
             if (data && data.error) {
                 // Display error message in the error paragraph
-                const errorParagraph = document.querySelector('.error2');
+                const errorParagraph = document.querySelector('.error');
                 errorParagraph.textContent = data.error;
                 errorParagraph.classList.remove('error--hidden');
             }
