@@ -3,7 +3,6 @@ from flask import Flask
 from datetime import timedelta
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads' 
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/mixmatch'
 
 
