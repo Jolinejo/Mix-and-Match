@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(response => {
           if (response.ok) {
               // Sign out successful, redirect to login page or perform any other action
-              window.location.href = '/homepage/'; // Redirect to login page
+              window.location.href = '/index/'; // Redirect to login page
           } else {
               // Handle sign out failure
               console.error('Sign out failed:', response.statusText);

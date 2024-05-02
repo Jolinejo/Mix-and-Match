@@ -1,35 +1,31 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Color Correction</title>
-        <link rel="stylesheet" href="/static/styles/style.css">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Color Analysis</title>
+    <link rel="stylesheet" href="/static/styles/landing.css">
+</head>
+<body>
 
-    </head>
-    <body>
-        <button id="signOutBtn">Sign Out</button>
-        <button id="dashboardBtn">Dashboard</button> 
-        <div class="hero">
-            <label for="input-file" id="drop-area">
-                <input type="file" accept="image/*" id="input-file" hidden>
-                <div id="img-view">
-                    <img src="/static/images/508-icon.png">
-                    <p>Drag and Drop or click here<br>to upload image</p>
-                    <span>Upload any images from desktop</span>
-                </div>
-            </label>
-            <form>
-                <div id="colorchoice">
-                    <label for="favcolor">Select your skin color:</label>
-                    <input type="color" id="skincolor" name="skincolor" value="#ff0000"><br><br>
-                    <p id="skin-color-display"></p>
-                </div>
-                <div id="output">
-                </div>
-            </form>
+<div class="hero">
+    <h1>Welcome to Mix and Match</h1>
+    <p>Discover the perfect colors for you!</p>
+    <div class="buttons-container">
+        <button id="loginBtn">Login</button>
+        <button id="signupBtn">Sign Up</button>
+    </div>
+</div>
 
-        </div>
-        <script src="/static/scripts/script.js"></script>
-    </body>
+<script>
+    document.getElementById("loginBtn").onclick = function() {
+        window.location.href = "/login/"; // Redirect to login page
+    };
+
+    document.getElementById("signupBtn").onclick = function() {
+        window.location.href = "/signup/"; // Redirect to signup page
+    };
+</script>
+
+</body>
 </html>

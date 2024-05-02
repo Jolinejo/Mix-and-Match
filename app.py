@@ -73,12 +73,11 @@ def remove_empty_lines(text):
 app.register_blueprint(user_routes)
 
 
-@app.route('/homepage/', methods=['GET'])
-@app.route('/homepage', methods=['GET'])
+@app.route('/index/', methods=['GET'])
 @app.route('/')
 def homepage():
     """homepage route"""
-    return render_template('homepage.html')
+    return render_template('index.html')
 
 @app.route('/ask', methods=['GET'])
 def retrieve_response():
@@ -118,19 +117,29 @@ def retrieve_response():
     print(data)
     return jsonify(data[0])
 
-@app.route('/index/', methods=['GET'])
+@app.route('/upload/', methods=['GET'])
 def index():
     """image uploading route"""
     if 'logged_in' in session:
-        return render_template('index.html')
-    return render_template('homepage.html')
+        return render_template('upload.html')
+    return render_template('index.html')
+
+@app.route('/login/', methods=['GET'])
+def loginPage():
+    """login redidrection"""
+    return render_template('login.html')
+
+@app.route('/signup/', methods=['GET'])
+def signupPage():
+    """login redidrection"""
+    return render_template('signup.html')
 
 @app.route('/dashboard/', methods=['GET'])
 def dashboard():
     """dashboard route"""
     if 'logged_in' in session:
         return render_template('dashboard.html')
-    return render_template('homepage.html')
+    return render_template('index.html')
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if __name__ == "__main__":

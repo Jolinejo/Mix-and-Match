@@ -1,9 +1,14 @@
-/* styles.css */
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
 }
 
 .form-container {
@@ -17,23 +22,16 @@
     margin: 0 10px;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f5f5f5;
-    padding: 20px;
-}
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Allow wrapping if needed */
-}
-
 form {
-    width: 48%; /* Adjust as needed */
+    width: 100%; /* Adjust as needed */
     background-color: #fff;
     border-radius: 20px;
     padding: 30px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #6831FF;
     margin-bottom: 20px;
 }
 
@@ -71,4 +69,13 @@ button:hover {
 
 .error--hidden {
     display: none;
+}
+a {
+    color: #6831FF; /* Default color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+a:hover {
+    color: #a39eff; /* Change color on hover to match button hover color */
 }
