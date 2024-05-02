@@ -1,11 +1,12 @@
 """ Starts a Flash Web Application """
-from flask import request, render_template, jsonify, session
+from flask import request, render_template, jsonify, session, redirect, url_for
 from flask_cors import CORS
 import config
 import google.generativeai as genai
 import re
 from extensions import app
 from user.routes import user_routes
+from functools import wraps
 
 
 def get_gemini_resp(color):
@@ -73,8 +74,20 @@ def remove_empty_lines(text):
 app.register_blueprint(user_routes)
 
 
+def logout_required(f):
+  @wraps(f)
+  def wrap(*args, **kwargs):
+    if 'logged_in' not in session:
+      return f(*args, **kwargs)
+    else:
+      return redirect(url_for('dashboard'))
+  
+  return wrap
+
+
 @app.route('/index/', methods=['GET'])
 @app.route('/')
+@logout_required
 def homepage():
     """homepage route"""
     return render_template('index.html')
@@ -117,29 +130,39 @@ def retrieve_response():
     print(data)
     return jsonify(data[0])
 
+def login_required(f):
+  @wraps(f)
+  def wrap(*args, **kwargs):
+    if 'logged_in' in session:
+      return f(*args, **kwargs)
+    else:
+      return redirect(url_for('loginPage'))
+  
+  return wrap
+
 @app.route('/upload/', methods=['GET'])
+@login_required
 def index():
     """image uploading route"""
-    if 'logged_in' in session:
-        return render_template('upload.html')
-    return render_template('index.html')
+    return render_template('upload.html')
 
 @app.route('/login/', methods=['GET'])
+@logout_required
 def loginPage():
     """login redidrection"""
     return render_template('login.html')
 
 @app.route('/signup/', methods=['GET'])
+@logout_required
 def signupPage():
     """login redidrection"""
     return render_template('signup.html')
 
 @app.route('/dashboard/', methods=['GET'])
+@login_required
 def dashboard():
     """dashboard route"""
-    if 'logged_in' in session:
-        return render_template('dashboard.html')
-    return render_template('index.html')
+    return render_template('dashboard.html')
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if __name__ == "__main__":
