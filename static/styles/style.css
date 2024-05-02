@@ -54,7 +54,7 @@
 #dashboardBtn {
     position: absolute;
     top: 10px;
-    left: 100px; /* Adjust left position to add space */
+    left: 120px; /* Adjust left position to add space */
     background-color: #6831FF;
     color: #fff;
     padding: 10px 20px;

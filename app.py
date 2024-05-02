@@ -54,8 +54,8 @@ def get_gemini_resp(color):
     name, hex code, name, hex code
     don't add any stars 
     put the all matching colors and all the hair colors in one line
-
-
+    don't forget to separate the name of the color and the code with a , 
+    don't put an extra , at the end of any line
     """
    # Create a list with the message as a dictionary with the "text" key
    model = genai.GenerativeModel('gemini-pro')
@@ -80,7 +80,7 @@ def logout_required(f):
     if 'logged_in' not in session:
       return f(*args, **kwargs)
     else:
-      return redirect(url_for('dashboard'))
+      return redirect(url_for('upload'))
   
   return wrap
 

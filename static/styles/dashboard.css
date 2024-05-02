@@ -4,7 +4,7 @@ body {
     background-color: #f7f8ff; /* Light background color */
     color: #6831FF; /* Primary text color */
     margin: 0;
-    padding: 20px;
+    padding: 100px;
 }
 
 h1 {
@@ -57,4 +57,32 @@ strong {
 
 a:hover {
     color: #a39eff; /* Slightly darker shade for hover state */
+}
+
+#signOutBtn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #6831FF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#uploadBtn {
+    position: absolute;
+    top: 10px;
+    left: 120px; /* Adjust left position to add space */
+    background-color: #6831FF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#signOutBtn:hover, #uploadBtn:hover{
+    background-color: #a39eff;
 }
